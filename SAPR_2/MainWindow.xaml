@@ -117,7 +117,7 @@
             <Button Name="buttonSetCommon"  Content="Set element as common"  Grid.Row="2" Width="300" Height="40" IsEnabled="False" Click="buttonSetCommon_Click"/>
             <Button Name="buttoRandomSchema" Content="Generate random schema and matrix" Grid.Row="3" Width="300" Height="40" Click="buttoRandomSchema_Click"/>
             <Button Name="buttonDestructorSchema" Content="Generate VNTU__Destructor's schema and matrix" Grid.Row="4" Width="300" Height="40" Click="buttonDestructorSchema_Click"/>
-            <Button Name="buttonPassLab" Content="Just pass this lab quickly" Grid.Row="5" Width="300" Height="40" Click="buttonPassLab_Click"/>
+            <Button Name="buttonPassLab" Content="Just do it quickly" Grid.Row="5" Width="300" Height="40" Click="buttonPassLab_Click"/>
         </Grid>
     </Grid>
 </Window>
