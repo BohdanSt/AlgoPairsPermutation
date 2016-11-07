@@ -1,0 +1,179 @@
+﻿// sapr2.cpp: определяет точку входа для консольного приложения.
+//
+
+#include "stdafx.h"
+#include <utility>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int placing[4][5];
+int Test[4][5];
+int connection[12][12];
+int OutDistances[12][12];
+int TestDistances[12][12];
+
+typedef std::pair<int, int> Coordinates;
+
+vector <Elem*> PlacedItems;
+vector <Elem*> PlacedItemsTest;
+
+int GetLength(int i, int j, vector<int> Match, int number)
+{
+	int sum = 0;
+	for each (int name in Match)
+	{
+		for each (Elem* item in PlacedItems)
+		{
+			if (item->Check(i, j))
+			{
+				sum = 100;
+				continue;
+			}
+			if (name == item->GetName() )
+			{
+				sum += (abs(i - item->Getrow()) + abs(j - item->Getcol()))*connection[number-1][name-1];
+			}
+		}
+	}
+	return sum;
+}
+
+void Place(int num)
+{
+	vector<int> idMatch;
+	for (int i = 0; i < 12; i++)
+	{
+		if (InList(i))
+		{
+			if (connection[num-1][i] != 0)
+				idMatch.push_back(i+1);
+		}
+	}
+	
+	int minlength = 100, x = -1, y = -1;
+	int temp;
+	for (int row = 0; row < 4; row++)
+		for (int col = 0; col < 5; col++)
+		{
+			temp = GetLength(row, col, idMatch, num);
+			if ( (temp < minlength) && (temp != 0) )
+			{
+				minlength = temp;
+				x = row;
+				y = col;
+			}
+		}
+	PlacedItems.push_back(new Elem(x, y, num));
+	placing[x][y] = num;
+}
+
+
+
+void CalculateDistances(int ch)
+{
+	int dist;
+	if (ch == 1)
+	{
+		for (int first = 0; first < 12; first++)
+		{
+			for (int second = 0; second < 12; second++)
+			{
+				dist = 0;
+				Coordinates FirstItem, SecondItem;
+				for each (Elem* item in PlacedItems)
+				{
+					if (item->GetName() == first + 1)
+					{
+						FirstItem = { item->Getrow(), item->Getcol() };
+					}
+
+					if (item->GetName() == second + 1)
+					{
+						SecondItem = { item->Getrow(), item->Getcol() };
+					}
+				}
+				
+				if (first != second)
+					dist = abs(FirstItem.first - SecondItem.first) + abs(FirstItem.second - SecondItem.second);
+
+				OutDistances[first][second] = OutDistances[second][first] = dist;
+			}
+		}
+	}
+	else
+	{
+		for (int first = 0; first < 12; first++)
+		{
+			for (int second = 0; second < 12; second++)
+			{
+				dist = 0;
+				Coordinates FirstItem, SecondItem;
+				for each (Elem* item in PlacedItemsTest)
+				{
+					if (item->GetName() == first + 1)
+					{
+						FirstItem = { item->Getrow(), item->Getcol() };
+					}
+
+					if (item->GetName() == second + 1)
+					{
+						SecondItem = { item->Getrow(), item->Getcol() };
+					}
+				}
+
+				if (first != second)
+					dist = abs(FirstItem.first - SecondItem.first) + abs(FirstItem.second - SecondItem.second);
+
+				TestDistances[first][second] = TestDistances[second][first] = dist;
+			}
+		}
+	}
+}
+
+void CalcEff()
+{
+	int oldlength = 0, newlength = 0;
+	for (int i = 0; i < 12; i++)
+	{
+		for (int j = i; j < 12; j++)
+		{
+			oldlength += TestDistances[i][j] * connection[i][j];
+		}
+	}
+	cout << "Old Length = " << oldlength << endl;
+
+	for (int i = 0; i < 12; i++)
+	{
+		for (int j = i; j < 12; j++)
+		{
+			newlength += OutDistances[i][j] * connection[i][j];
+		}
+	}
+	cout << "New Length = " << newlength << endl;
+
+	int eff = 100 - newlength * 100 / oldlength;
+	cout << "Optimized = " << eff << "%" << endl;
+}
+
+void main()
+{
+
+	cout << "Entry Plate" << endl;
+	InitializePlate();
+	InitializeTestPlate();
+	//PrintConnections();
+	while (PlacedItems.size() != 12)
+	{
+		SelectItem();
+	}
+	CalculateDistances(1);
+	CalculateDistances(2);
+	cout << endl << "Out Plate" ;
+	PrintPlate(1);
+	cout << endl << "Test Plate" ;
+	PrintPlate(2);
+
+	CalcEff();
+	getchar();
+}

@@ -1,0 +1,123 @@
+﻿<Window x:Class="SAPR_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAPR_2"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="SAPR_2" Height="650" Width="850">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Schema" TextAlignment="Center" Grid.Row="0" Margin="10"/>
+            <Grid Grid.Row="1" x:Name="gridSchema" Margin="20, 10" ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="MATRIX" TextAlignment="Center" Grid.Row="0" Margin="10"/>
+            <Grid x:Name="gridMatrix" Grid.Row="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Result" TextAlignment="Center" Grid.Row="0" Margin="10"/>
+            <Grid Grid.Row="1" x:Name="gridResult"  Margin="20, 10" ShowGridLines="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="0, 0, 0, 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Controls" TextAlignment="Center" Margin="10" Grid.Row="0" />
+            <Button Name="buttonSetBase" Content="Set element as base" Grid.Row="1" Width="300" Height="40" IsEnabled="False" Click="buttonSetBase_Click"/>
+            <Button Name="buttonSetCommon"  Content="Set element as common"  Grid.Row="2" Width="300" Height="40" IsEnabled="False" Click="buttonSetCommon_Click"/>
+            <Button Name="buttoRandomSchema" Content="Generate random schema and matrix" Grid.Row="3" Width="300" Height="40" Click="buttoRandomSchema_Click"/>
+            <Button Name="buttonDestructorSchema" Content="Generate VNTU__Destructor's schema and matrix" Grid.Row="4" Width="300" Height="40" Click="buttonDestructorSchema_Click"/>
+            <Button Name="buttonPassLab" Content="Just pass this lab quickly" Grid.Row="5" Width="300" Height="40" Click="buttonPassLab_Click"/>
+        </Grid>
+    </Grid>
+</Window>
