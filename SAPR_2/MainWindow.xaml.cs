@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SAPR_2
 {
@@ -428,6 +430,8 @@ namespace SAPR_2
 
             int distanceOld = schema.CalculateDistancesOld();
 
+            gridResult.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
             int num;
             TextBlock textBlockResult;
             while ((num = schema.GetBestElement()) != -1)
@@ -437,7 +441,11 @@ namespace SAPR_2
                 textBlockResult.MouseDown -= schema_MouseDown;
                 textBlockResult.SetValue(Grid.RowProperty, schema.Elements[num].Y);
                 textBlockResult.SetValue(Grid.ColumnProperty, schema.Elements[num].X);
+
                 gridResult.Children.Add(textBlockResult);
+                gridResult.Dispatcher.Invoke(DispatcherPriority.Render, (Action) (() => { }));
+                Thread.Sleep(500);
+                gridResult.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
             }
 
             int distanceNew = schema.CalculateDistancesNew();
